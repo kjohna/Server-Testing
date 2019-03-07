@@ -50,4 +50,22 @@ describe('supplies model', () => {
       expect(getSupply.name).toEqual('pencil');
     });
   }); // end get
+
+  describe('delete', () => {
+    // clean up after
+    afterEach(async () => {
+      await db('supplies').truncate();
+    });
+
+    it('should delete supply by id', async () => {
+      await Supplies.insert({ name: 'pen' }).id;
+      await Supplies.insert({ name: 'tape' });
+      await Supplies.insert({ name: 'ruler' });
+
+      await Supplies.remove(3);
+
+      let res = await Supplies.getAll();
+      expect(res).toHaveLength(2);
+    });
+  }); // end delete
 });

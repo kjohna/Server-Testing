@@ -4,6 +4,7 @@ module.exports = {
   insert,
   getAll,
   getById,
+  remove,
 }
 
 async function insert(supply) {
@@ -17,4 +18,8 @@ function getAll() {
 
 async function getById(id) {
   return db('supplies').where({ id }).first();
+}
+
+async function remove(id) {
+  return db('supplies').where({ id }).del();
 }
