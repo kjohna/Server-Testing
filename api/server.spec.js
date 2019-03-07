@@ -23,4 +23,17 @@ describe('server.js', () => {
       expect(res.body).toEqual({ server: 'works!' });
     });
   });
+
+  describe('GET /supplies', () => {
+    // test response code
+    it('should return 200 OK', async() => {
+      const res = await request(server).get('/supplies');
+      expect(res.status).toBe(200);
+    });
+    // test response data type
+    it('should return JSON', async () => {
+      const res = await request(server).get('/supplies');
+      expect(res.type).toBe('application/json');
+    });
+  });
 });
